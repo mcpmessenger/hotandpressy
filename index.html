@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hot and Pressy — We Press. You Flex.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; background: #0a0a0a; color: #f5f5f5; line-height: 1.6; overflow-x: hidden; }
+  h1, h2, h3, .display { font-family: 'Anton', 'Arial Black', sans-serif; font-weight: 400; }
+
+  /* animated heat hero */
+  .hero { position: relative; min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 40px 20px; overflow: hidden;
+    background: radial-gradient(ellipse 80% 60% at 50% 110%, #ff4d00 0%, #c1121f 35%, #3a0000 70%, #0a0a0a 100%); }
+  .hero::before { content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 40% 30% at 50% 100%, rgba(255,183,3,.55), transparent 70%);
+    animation: breathe 4s ease-in-out infinite; }
+  @keyframes breathe { 0%,100% { opacity: .6; transform: scaleY(1); } 50% { opacity: 1; transform: scaleY(1.15); } }
+  .hero-inner { position: relative; z-index: 2; }
+  .tag { display: inline-block; background: rgba(255,183,3,.15); border: 1px solid #ffb703; color: #ffb703; font-weight: 700; font-size: .85rem; padding: 8px 20px; border-radius: 100px; margin-bottom: 24px; letter-spacing: 1px; text-transform: uppercase; }
+  .hero h1 { font-size: clamp(3rem, 9vw, 6.5rem); line-height: .95; letter-spacing: -2px; margin-bottom: 8px; }
+  .hero h1 .pressy { background: linear-gradient(180deg, #ffb703, #ff4d00); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero .sub { font-size: clamp(1.3rem, 3vw, 2rem); font-weight: 700; margin-bottom: 16px; }
+  .hero .sub em { color: #ffb703; font-style: normal; }
+  .hero p.desc { max-width: 560px; margin: 0 auto 32px; font-size: 1.1rem; opacity: .85; }
+  .cta { display: inline-block; background: #ffb703; color: #111; font-family: 'Anton', 'Arial Black', sans-serif; font-size: 1.05rem; padding: 16px 44px; border-radius: 100px; text-decoration: none; transition: transform .15s; }
+  .cta:hover { transform: scale(1.05); }
+  .heat-note { margin-top: 20px; font-size: .9rem; opacity: .6; }
+
+  /* marquee */
+  .marquee { background: #ffb703; color: #111; overflow: hidden; white-space: nowrap; padding: 14px 0; font-family: 'Anton', 'Arial Black', sans-serif; font-size: 1rem; }
+  .marquee span { display: inline-block; padding: 0 24px; animation: scroll 22s linear infinite; }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  .section { max-width: 1000px; margin: 0 auto; padding: 80px 20px; }
+  .section h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin-bottom: 12px; letter-spacing: -1px; }
+  .section h2 .accent { color: #ffb703; }
+  .section .lede { font-size: 1.15rem; opacity: .75; max-width: 640px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 36px; }
+  .card { background: #141414; border: 1px solid #2a2a2a; border-radius: 16px; padding: 30px; position: relative; overflow: hidden; transition: border-color .2s; }
+  .card:hover { border-color: #ff4d00; }
+  .card .num { font-family: 'Anton', 'Arial Black', sans-serif; font-size: 3rem; color: #2a2a2a; position: absolute; top: 12px; right: 20px; }
+  .card h3 { font-size: 1.25rem; margin-bottom: 10px; }
+  .card h3 .fire { margin-right: 8px; }
+  .card p { opacity: .75; font-size: .98rem; }
+
+  .price-card { text-align: center; padding: 36px 24px; }
+  .price-card .amt { font-family: 'Anton', 'Arial Black', sans-serif; font-size: 3.2rem; color: #ffb703; }
+  .price-card .per { opacity: .6; font-size: .9rem; }
+  .price-card ul { list-style: none; margin: 20px 0; text-align: left; }
+  .price-card li { padding: 8px 0; border-bottom: 1px solid #2a2a2a; font-size: .95rem; }
+  .price-card li::before { content: '🔥 '; }
+  .price-card.featured { border: 2px solid #ffb703; transform: scale(1.03); }
+
+  .quote-box { background: #141414; border: 1px solid #2a2a2a; border-radius: 20px; padding: 40px; margin-top: 32px; }
+  label { display: block; margin: 18px 0 6px; font-weight: 700; font-size: .95rem; }
+  input, textarea, select { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #3a3a3a; background: #0a0a0a; color: #f5f5f5; font-size: 1rem; font-family: inherit; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #ff4d00; }
+  textarea { min-height: 110px; resize: vertical; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 600px) { .row { grid-template-columns: 1fr; } }
+  button[type=submit] { background: linear-gradient(135deg, #ffb703, #ff4d00); color: #111; font-family: 'Anton', 'Arial Black', sans-serif; font-size: 1.05rem; padding: 16px; border: none; border-radius: 100px; cursor: pointer; margin-top: 24px; width: 100%; transition: transform .15s; }
+  button[type=submit]:hover { transform: scale(1.02); }
+
+  footer { text-align: center; padding: 48px 20px; color: #666; font-size: .9rem; border-top: 1px solid #1a1a1a; }
+  footer .logo { font-family: 'Anton', 'Arial Black', sans-serif; font-size: 1.4rem; color: #f5f5f5; margin-bottom: 8px; }
+  footer .logo span { color: #ff4d00; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="tag">🔥 Ankeny, Iowa</div>
+    <h1>HOT <span class="pressy">AND PRESSY</span></h1>
+    <div class="sub">We press. <em>You flex.</em></div>
+    <p class="desc">Custom team shirts with names, numbers, and logos — pressed local in days, not weeks. Your squad looks dangerous. The other team looks nervous.</p>
+    <a class="cta" href="#order">START YOUR ORDER</a>
+    <div class="heat-note">no hidden fees · free mockup before we press</div>
+  </div>
+</div>
+
+<div class="marquee"><span>🔥 TEAM SHIRTS &nbsp;🔥 NAMES + NUMBERS &nbsp;🔥 3–5 DAY TURNAROUND &nbsp;🔥 PRESSED IN ANKENY &nbsp;🔥 TEAM SHIRTS &nbsp;🔥 NAMES + NUMBERS &nbsp;🔥 3–5 DAY TURNAROUND &nbsp;🔥 PRESSED IN ANKENY &nbsp;</span></div>
+
+<div class="section">
+  <h2>How it <span class="accent">works</span></h2>
+  <p class="lede">Four steps. Zero headaches. You coach — we handle the shirts.</p>
+  <div class="grid">
+    <div class="card"><div class="num">01</div><h3><span class="fire">📋</span>Send the roster</h3><p>Team name, colors, player names + numbers. Got a logo? Send it. Don't? We'll cook one up.</p></div>
+    <div class="card"><div class="num">02</div><h3><span class="fire">👀</span>Approve the mockup</h3><p>Digital proof in your inbox within 24 hours. Nothing gets pressed until you say "that's fire."</p></div>
+    <div class="card"><div class="num">03</div><h3><span class="fire">🔥</span>We press</h3><p>DTF transfers, pro heat press, every shirt checked by hand. Crisp lines, no peeling, no fading.</p></div>
+    <div class="card"><div class="num">04</div><h3><span class="fire">🏆</span>You pick up</h3><p>Ready in 3–5 days. Grab 'em in Ankeny or we'll deliver around the metro.</p></div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>Straight-up <span class="accent">pricing</span></h2>
+  <p class="lede">No quotes that take a week. No "call for pricing." Here it is.</p>
+  <div class="grid">
+    <div class="card price-card">
+      <h3>Fan Shirt</h3>
+      <div class="amt">$15</div><div class="per">per shirt</div>
+      <ul><li>Front logo</li><li>Parents + fans</li><li>Same fast turnaround</li></ul>
+    </div>
+    <div class="card price-card featured">
+      <h3>Team Shirt</h3>
+      <div class="amt">$20</div><div class="per">per shirt</div>
+      <ul><li>Front logo</li><li>Back name + number</li><li>Coach shirts included</li><li>Free mockup</li></ul>
+    </div>
+    <div class="card price-card">
+      <h3>League Deal</h3>
+      <div class="amt">???</div><div class="per">let's talk</div>
+      <ul><li>Multiple teams</li><li>Volume pricing</li><li>Season-long partner</li></ul>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="order">
+  <h2>Get your team <span class="accent">pressed</span></h2>
+  <p class="lede">Tell us about your squad. We'll reply within 24 hours with a mockup and a firm quote.</p>
+  <div class="quote-box">
+    <form action="mailto:will@automationalien.com" method="post" enctype="text/plain">
+      <div class="row">
+        <div><label>Your name</label><input type="text" name="name" required></div>
+        <div><label>Email</label><input type="email" name="email" required></div>
+      </div>
+      <div class="row">
+        <div><label>Team / org</label><input type="text" name="team" required></div>
+        <div><label>Sport</label>
+          <select name="sport"><option>Baseball / Softball</option><option>Soccer</option><option>Basketball</option><option>Football</option><option>Volleyball</option><option>Wrestling</option><option>Other</option></select>
+        </div>
+      </div>
+      <label>Shirt type</label>
+      <select name="shirt_type" id="shirt_type" onchange="updateQuote()">
+        <option value="20">Team Shirt — $20 (front logo + back name/number)</option>
+        <option value="15">Fan Shirt — $15 (front logo only)</option>
+      </select>
+      <label>How many shirts?</label>
+      <input type="number" name="quantity" id="qty" min="1" value="10" oninput="updateQuote()">
+      <div id="quote" style="margin-top:20px; padding:20px; background:#0a0a0a; border:1px solid #ffb703; border-radius:12px; text-align:center;">
+        <div style="font-size:.9rem; opacity:.7;">YOUR TOTAL</div>
+        <div id="quote_amt" style="font-family:'Anton','Arial Black',sans-serif; font-size:2.5rem; color:#ffb703;">$300</div>
+        <div id="quote_breakdown" style="font-size:.85rem; opacity:.6;">15 × Team Shirt @ $20</div>
+        <a id="pay_btn" href="https://buy.stripe.com/9B6aEQ6EZ8MW5iO8nO7Vm02" target="_blank" style="display:inline-block; margin-top:16px; background:linear-gradient(135deg,#ffb703,#ff4d00); color:#111; font-family:'Anton','Arial Black',sans-serif; font-size:1.1rem; padding:14px 48px; border-radius:100px; text-decoration:none;">🔥 PAY NOW</a>
+        <div style="font-size:.8rem; opacity:.5; margin-top:8px;">Secure checkout via Stripe · adjust quantity on the payment page</div>
+      </div>
+      <script>
+        var LINKS = { '20': 'https://buy.stripe.com/9B6aEQ6EZ8MW5iO8nO7Vm02', '15': 'https://buy.stripe.com/28E5kw0gB0gqfXs0Vm7Vm01' };
+        function updateQuote() {
+          var price = parseInt(document.getElementById('shirt_type').value) || 20;
+          var qty = parseInt(document.getElementById('qty').value) || 0;
+          var label = document.getElementById('shirt_type').selectedOptions[0].text.split(' — ')[0];
+          document.getElementById('quote_amt').textContent = '$' + (price * qty).toLocaleString();
+          document.getElementById('quote_breakdown').textContent = qty + ' × ' + label + ' @ $' + price;
+          document.getElementById('pay_btn').href = LINKS[String(price)];
+        }
+        updateQuote();
+      </script>
+      <label>Team logo <span style="opacity:.5; font-weight:400;">(optional — we'll cook one up if you don't have one)</span></label>
+      <div id="logo_drop" style="border:2px dashed #3a3a3a; border-radius:12px; padding:32px; text-align:center; cursor:pointer; transition:border-color .2s;" onclick="document.getElementById('logo_file').click()">
+        <div id="logo_placeholder">
+          <div style="font-size:2rem;">🖼️</div>
+          <div style="font-weight:700;">Drop your logo here or click to browse</div>
+          <div style="font-size:.85rem; opacity:.5;">PNG, JPG or SVG · max 10MB</div>
+        </div>
+        <img id="logo_preview" style="display:none; max-width:200px; max-height:200px; border-radius:8px;" alt="Logo preview">
+      </div>
+      <input type="file" id="logo_file" name="logo" accept=".png,.jpg,.jpeg,.svg,.webp" style="display:none;">
+      <script>
+        var logoInput = document.getElementById('logo_file');
+        logoInput.addEventListener('change', function() {
+          var f = logoInput.files[0];
+          if (!f) return;
+          if (f.size > 10 * 1024 * 1024) { alert('Logo must be under 10MB'); logoInput.value = ''; return; }
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            document.getElementById('logo_preview').src = e.target.result;
+            document.getElementById('logo_preview').style.display = 'inline-block';
+            document.getElementById('logo_placeholder').style.display = 'none';
+          };
+          reader.readAsDataURL(f);
+        });
+        // drag + drop
+        var drop = document.getElementById('logo_drop');
+        drop.addEventListener('dragover', function(e) { e.preventDefault(); drop.style.borderColor = '#ff4d00'; });
+        drop.addEventListener('dragleave', function() { drop.style.borderColor = '#3a3a3a'; });
+        drop.addEventListener('drop', function(e) {
+          e.preventDefault(); drop.style.borderColor = '#3a3a3a';
+          if (e.dataTransfer.files.length) { logoInput.files = e.dataTransfer.files; logoInput.dispatchEvent(new Event('change')); }
+        });
+      </script>
+      <label>Roster — names + numbers, one per line</label>
+      <textarea name="roster" placeholder="1. Jackson — #7&#10;2. Emma — #12&#10;3. ..."></textarea>
+      <label>Anything else? (colors, logo, deadline)</label>
+      <textarea name="notes" style="min-height:70px" placeholder="Need 'em before the tournament on..."></textarea>
+      <button type="submit">🔥 GET MY QUOTE</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="logo">HOT <span>AND</span> PRESSY</div>
+  Pressed with heat in Ankeny, Iowa.<br>
+  <a href="mailto:will@automationalien.com" style="color:#ffb703;">will@automationalien.com</a>
+</footer>
+
+</body>
+</html>
